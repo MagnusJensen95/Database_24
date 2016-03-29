@@ -42,13 +42,13 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 	@Override
 	public void createRaavare(RaavareDTO raavare) throws DALException {
 		try {
-			connector.doUpdate(" Insert into receptkomponent (raavare_id, raavare_navn, leverandoer) VALUES ("
-					+raavare.getRaavareId()+ ", "
-					+raavare.getRaavareNavn() + ", "
-					+raavare.getLeverandoer() + ", ");
+			connector.doUpdate(" Insert into raavare (raavare_id, raavare_navn, leverandoer) VALUES ("
+					+raavare.getRaavareId()+ ", '"
+					+raavare.getRaavareNavn() + "', '"
+					+raavare.getLeverandoer() + "')");
 						
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 	}
