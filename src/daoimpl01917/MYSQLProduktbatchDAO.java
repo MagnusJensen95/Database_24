@@ -61,7 +61,7 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 		try {
 			connector.doUpdate(
 					"UPDATE produktbatch SET  status = " + produktbatch.getStatus() + "  WHERE pb_id = " +
-					produktbatch.getPbId()+ ")");
+					produktbatch.getPbId());
 
 					} catch (SQLException e) {
 			e.printStackTrace();

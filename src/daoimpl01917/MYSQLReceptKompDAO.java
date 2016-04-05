@@ -18,7 +18,7 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 	@Override
 	public ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException {
 		 try {
-		    	ResultSet rs = connector.doQuery("SELECT * FROM receptkomponetent WHERE recept_id = " + receptId + ", and raavare_id = " + raavareId);
+		    	ResultSet rs = connector.doQuery("SELECT * FROM receptkomponent WHERE recept_id = " + receptId + ", and raavare_id = " + raavareId);
 		    	if (!rs.first()) throw new DALException("Recept " + receptId + " findes ikke");
 		    	return new ReceptKompDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getDouble("tolerance"));
 		    }
@@ -31,7 +31,7 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 		
 		try
 		{
-			ResultSet rs = connector.doQuery("SELECT * FROM recept where recept_id = " + receptId);
+			ResultSet rs = connector.doQuery("SELECT * FROM receptkomponent where recept_id = " + receptId);
 			while (rs.next()) 
 			{
 				list.add(new ReceptKompDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getDouble("tolerance")));			}
@@ -46,7 +46,7 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 		
 		try
 		{
-			ResultSet rs = connector.doQuery("SELECT * FROM recept");
+			ResultSet rs = connector.doQuery("SELECT * FROM receptkomponent");
 			while (rs.next()) 
 			{
 				list.add(new ReceptKompDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getDouble("tolerance")));			}
