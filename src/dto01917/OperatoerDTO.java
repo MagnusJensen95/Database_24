@@ -20,9 +20,9 @@ public class OperatoerDTO
 	/** Operatoer password min. 7 max. 8 karakterer */
 	String password;            
 
-	public OperatoerDTO(int oprId, String oprNavn, String ini, String cpr, String password)
+	public OperatoerDTO(String oprNavn, String ini, String cpr, String password)
 	{
-		this.oprId = oprId;
+		
 		this.oprNavn = oprNavn;
 		this.ini = ini;
 		this.cpr = cpr;
@@ -31,16 +31,16 @@ public class OperatoerDTO
 	
     public OperatoerDTO(OperatoerDTO opr)
     {
-    	this.oprId = opr.getOprId();
+    	
     	this.oprNavn = opr.getOprNavn();
     	this.ini = opr.getIni();
     	this.cpr = opr.getCpr();
     	this.password = opr.getPassword();
     }
     
-    public int getOprId() { return oprId; }
-    
-	public void setOprId(int oprId) { this.oprId = oprId; }
+//    public int getOprId() { return oprId; }
+//    
+//	public void setOprId(int oprId) { this.oprId = oprId; }
 	
 	public String getOprNavn() { return oprNavn; }
 	public void setOprNavn(String oprNavn) { this.oprNavn = oprNavn; }

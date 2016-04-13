@@ -12,12 +12,12 @@ import dto01917.ReceptKompDTO;
 
 public class MYSQLRaavareDAO implements RaavareDAO{
 	
-	private Connector connector = new Connector();
+	
 
 	@Override
 	public RaavareDTO getRaavare(int raavareId) throws DALException {
 		try {
-	    	ResultSet rs = connector.doQuery("SELECT * FROM raavare WHERE raavare_id = " + raavareId);
+	    	ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM raavare WHERE raavare_id = " + raavareId);
 	    	if (!rs.first()) throw new DALException("Raavare " + raavareId + " findes ikke");
 	    	return new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"));
 	    }
@@ -30,7 +30,7 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 		
 		try
 		{
-			ResultSet rs = connector.doQuery("SELECT * FROM raavare");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM raavare");
 			while (rs.next()) 
 			{
 				list.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer")));			}
@@ -42,7 +42,7 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 	@Override
 	public void createRaavare(RaavareDTO raavare) throws DALException {
 		try {
-			connector.doUpdate(" Insert into raavare (raavare_id, raavare_navn, leverandoer) VALUES ("
+			Connector.getInstance().doUpdate(" Insert into raavare (raavare_id, raavare_navn, leverandoer) VALUES ("
 					+raavare.getRaavareId()+ ", '"
 					+raavare.getRaavareNavn() + "', '"
 					+raavare.getLeverandoer() + "')");
@@ -56,7 +56,7 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 	@Override
 	public void updateRaavare(RaavareDTO raavare) throws DALException {
 		try {
-			connector.doUpdate(
+			Connector.getInstance().doUpdate(
 					"UPDATE raavare SET  raavare_navn= '" + raavare.getRaavareNavn() + "', leverandoer = '"
 							+ raavare.getLeverandoer() + "' WHERE raavare_id = " + raavare.getRaavareId());
 			

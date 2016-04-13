@@ -12,13 +12,13 @@ import dto01917.ProduktBatchDTO;
 
 public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 
-	private Connector connector = new Connector();
+	
 	
 	@Override
 	public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {
 		
 	    try {
-	    	ResultSet rs = connector.doQuery("SELECT * FROM produktbatch WHERE pb_id = " + pbId);
+	    	ResultSet rs =Connector.getInstance().doQuery("SELECT * FROM produktbatch WHERE pb_id = " + pbId);
 	    	if (!rs.first()) throw new DALException("Produktbatch " + pbId+ " findes ikke");
 	    	return new ProduktBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id"));
 	    }
@@ -34,7 +34,7 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 		
 		try
 		{
-			ResultSet rs = connector.doQuery("SELECT * FROM produktbatch");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM produktbatch");
 			while (rs.next()) 
 			{
 				list.add(new ProduktBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id")));
@@ -47,7 +47,7 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 	@Override
 	public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
 		try {
-			connector.doUpdate(
+			Connector.getInstance().doUpdate(
 				"INSERT INTO produktbatch(pb_id, status, recept_id) VALUES " +
 				"(" + produktbatch.getPbId()+ ", " + produktbatch.getStatus() + ", " + produktbatch.getReceptId()  +") ");
 			
@@ -59,7 +59,7 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 	@Override
 	public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
 		try {
-			connector.doUpdate(
+			Connector.getInstance().doUpdate(
 					"UPDATE produktbatch SET  status = " + produktbatch.getStatus() + "  WHERE pb_id = " +
 					produktbatch.getPbId());
 
