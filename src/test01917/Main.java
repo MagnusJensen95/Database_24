@@ -2,6 +2,7 @@ package test01917;
 
 import daoimpl01917.*;
 import daointerfaces01917.DALException;
+import dto01917.FarmaceutDTO;
 import dto01917.OperatoerDTO;
 import dto01917.ProduktBatchDTO;
 import dto01917.ProduktBatchKompDTO;
@@ -9,6 +10,7 @@ import dto01917.RaavareBatchDTO;
 import dto01917.RaavareDTO;
 import dto01917.ReceptDTO;
 import dto01917.ReceptKompDTO;
+import dto01917.VaerkfoererDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,6 +28,8 @@ public class Main {
 //		MYSQLProduktBatchKompDAO produktBatchKomp = new MYSQLProduktBatchKompDAO();
 //		MYSQLProduktbatchDAO produktBatch = new MYSQLProduktbatchDAO();
 		MySQLOperatoerDAO operatoer = new MySQLOperatoerDAO();
+		MySQLVaerkfoererDAO vaerkfoerer = new MySQLVaerkfoererDAO();
+		MySQLFarmaceutDAO farmaceut = new MySQLFarmaceutDAO();
 		
 
 //		RaavareDTO nyraa = new RaavareDTO(8, "Jensen", "Plebias");
@@ -61,12 +65,14 @@ public class Main {
 //		}
 		
 		OperatoerDTO operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
+		OperatoerDTO operatoerDTO2 = new OperatoerDTO("jensen", "PN", "121291-1212", "suckit");
 		try{
 			operatoer.createOperatoer(operatoerDTO);
+			
 //			operatoerDTO.setOprNavn("Mar");
 //			operatoerDTO.setPassword("JegMar,erennoob");
 //			operatoerDTO.setIni("KM");
-//			operatoer.updateOperatoer(operatoerDTO);
+			operatoer.updateOperatoer(operatoerDTO2, operatoerDTO.getOprId());
 //			operatoer.getOperatoer(5);
 			List<OperatoerDTO> liste = operatoer.getOperatoerList();
 			for(OperatoerDTO e : liste){
@@ -75,6 +81,53 @@ public class Main {
 		} catch (DALException e){
 			e.printStackTrace();
 		}
+		
+		
+		VaerkfoererDTO VaerkfoererDTO = new VaerkfoererDTO("Plebnus", "PN", "121291-1212", "suckit");
+		VaerkfoererDTO VaerkfoererDTO2 = new VaerkfoererDTO("jensen", "PN", "121291-1212", "suckit");
+		try{
+			vaerkfoerer.createVaerkfoerer(VaerkfoererDTO);
+//			VaerkfoererDTO.setOprNavn("Mar");
+//			VaerkfoererDTO.setPassword("JegMar,erennoob");
+//			VaerkfoererDTO.setIni("KM");
+			vaerkfoerer.updateVaerkfoerer(VaerkfoererDTO2, VaerkfoererDTO.getvaerkId());
+//			Vaerkfoerer.getVaerkfoerer(5);
+			List<VaerkfoererDTO> liste = vaerkfoerer.getVaerkfoererList();
+			for(VaerkfoererDTO e : liste){
+			//	System.out.println("Id: " & navn: "+e.getOprNavn()+" & ini: "+e.getIni()+" & pass: "+e.getPassword());
+			}
+		} catch (DALException e){
+			e.printStackTrace();
+		}
+		
+		FarmaceutDTO FarmaceutDTO = new FarmaceutDTO("Plebnus", "PN", "121291-1212", "suckit");
+		FarmaceutDTO FarmaceutDTO2 = new FarmaceutDTO("jensen", "PN", "121291-1212", "suckit");
+		
+		try{
+			farmaceut.createFarmaceut(FarmaceutDTO);
+//			FarmaceutDTO.setOprNavn("Mar");
+//			FarmaceutDTO.setPassword("JegMar,erennoob");
+//			FarmaceutDTO.setIni("KM");
+			farmaceut.updateFarmaceut(FarmaceutDTO2, FarmaceutDTO.getfarmId());
+//			Farmaceut.getFarmaceut(5);
+			List<FarmaceutDTO> liste = farmaceut.getFarmaceutList();
+			for(FarmaceutDTO e : liste){
+			//	System.out.println("Id: " & navn: "+e.getOprNavn()+" & ini: "+e.getIni()+" & pass: "+e.getPassword());
+			}
+		} catch (DALException e){
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 //		ReceptKompDTO receptKompDTO = new ReceptKompDTO(4, 8, 20, 0.1);
 //		try{

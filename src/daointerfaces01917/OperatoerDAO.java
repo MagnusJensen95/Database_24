@@ -15,5 +15,5 @@ public interface OperatoerDAO {
 	
 	
 
-	void updateOperatoer(OperatoerDTO opr) throws DALException;
+	void updateOperatoer(OperatoerDTO opr, int id) throws DALException;
 }

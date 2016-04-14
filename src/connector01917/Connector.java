@@ -50,4 +50,8 @@ public class Connector {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate(query);
     }
+
+	public Connection getConnection() {
+		return connection;
+	}
 }

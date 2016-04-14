@@ -20,7 +20,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 		
 	    try {
 	    	ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM operatoer WHERE opr_id = " + oprId);
-	    	if (!rs.first()) throw new DALException("Operatoeren " + oprId + " findes ikke");
+	    	if (!rs.first()) throw new DALException("Operatoeren, " + oprId + ", findes ikke.");
 	    	return new OperatoerDTO (rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
@@ -28,25 +28,50 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 		
 	}
 	
-	public void createOperatoer(OperatoerDTO opr) throws DALException {		
-			try {
-				//connector.doUpdate(
-				//	"call add_Operatoer('"+opr.getOprNavn()+"', '" + opr.getIni() + "', '" + opr.getCpr() + ", ' " + opr.getPassword() + "');"
-				
-				Connector.getInstance().doUpdate("call add_operatoer('"+opr.getOprNavn()+"', '" + opr.getIni() + "', '" + opr.getCpr() + "' , '" + opr.getPassword() + "')");
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-	}
+	public void createOperatoer(OperatoerDTO opr) throws DALException {  
+		   try {
+			   int id = 0;
+		    //Connector.getInstance().getConnection().setAutoCommit(false);
+		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_operatoer(?,?,?,?)");
+		    createOP.setString(1, opr.getOprNavn());
+		    createOP.setString(2, opr.getIni());
+		    createOP.setString(3, opr.getCpr());
+		    createOP.setString(4, opr.getPassword());
+		    createOP.execute();
+		    //Connector.getInstance().getConnection().commit();
+		    
+		    ResultSet rs = Connector.getInstance().doQuery("select max(opr_id) from operatoer;");
+		    if (rs.first())
+		
+		    
+			id = Integer.parseInt(rs.getString(1));							
+			opr.setOprId(id);
+			
+		    
+		   } catch (Exception e) {
+			   e.printStackTrace();
+		    System.out.println("Cannot create operator");
+		    //Connector.getInstance().getConnection().rollback();
+		    
+		   }
+		   finally {
+		    //Connector.getInstance().getConnection().setAutoCommit(true);
+		   }
+		 }
 	
-	public void updateOperatoer(OperatoerDTO opr) throws DALException {
+	public void updateOperatoer(OperatoerDTO opr, int id) throws DALException {
 		try {
-			Connector.getInstance().doUpdate(
-					"UPDATE operatoer SET  opr_navn = '" + opr.getOprNavn() + "', ini =  '" + opr.getIni() + 
-					"', cpr = '" + opr.getCpr() + "', password = '" + opr.getPassword() + "' WHERE opr_id = " 
-					
-			);
+			
+			CallableStatement updateOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call update_operatoer(?,?,?,?,?)");
+			updateOP.setString(1, opr.getOprNavn());
+			updateOP.setString(2, opr.getIni());
+			updateOP.setString(3, opr.getCpr());
+			updateOP.setString(4, opr.getPassword());
+			updateOP.setInt(5, id);
+			updateOP.execute();
+
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
