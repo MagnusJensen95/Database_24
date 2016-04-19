@@ -57,7 +57,7 @@ public class Main {
 //			raavBatch.getRaavareBatch(8);
 //			List<RaavareBatchDTO> liste = raavBatch.getRaavareBatchList();
 //			for(RaavareBatchDTO e : liste){
-//				System.out.println("Id: "+e.getRbId()+" & mængde: "+e.getMaengde());
+//				System.out.println("Id: "+e.getRbId()+" & mï¿½ngde: "+e.getMaengde());
 //			}
 //			
 //		} catch (DALException e){
@@ -74,9 +74,10 @@ public class Main {
 //			operatoerDTO.setIni("KM");
 			operatoer.updateOperatoer(operatoerDTO2, operatoerDTO.getOprId());
 //			operatoer.getOperatoer(5);
+			System.out.println(operatoer.getOperatoer(2).getOprNavn());
 			List<OperatoerDTO> liste = operatoer.getOperatoerList();
 			for(OperatoerDTO e : liste){
-			//	System.out.println("Id: " & navn: "+e.getOprNavn()+" & ini: "+e.getIni()+" & pass: "+e.getPassword());
+				System.out.println(e.toString());
 			}
 		} catch (DALException e){
 			e.printStackTrace();
@@ -94,7 +95,7 @@ public class Main {
 //			Vaerkfoerer.getVaerkfoerer(5);
 			List<VaerkfoererDTO> liste = vaerkfoerer.getVaerkfoererList();
 			for(VaerkfoererDTO e : liste){
-			//	System.out.println("Id: " & navn: "+e.getOprNavn()+" & ini: "+e.getIni()+" & pass: "+e.getPassword());
+				System.out.println(e.toString());
 			}
 		} catch (DALException e){
 			e.printStackTrace();
@@ -112,7 +113,7 @@ public class Main {
 //			Farmaceut.getFarmaceut(5);
 			List<FarmaceutDTO> liste = farmaceut.getFarmaceutList();
 			for(FarmaceutDTO e : liste){
-			//	System.out.println("Id: " & navn: "+e.getOprNavn()+" & ini: "+e.getIni()+" & pass: "+e.getPassword());
+				System.out.println(e.toString());
 			}
 		} catch (DALException e){
 			e.printStackTrace();

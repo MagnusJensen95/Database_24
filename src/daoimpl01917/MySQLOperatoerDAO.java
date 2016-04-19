@@ -10,6 +10,7 @@ import connector01917.Connector;
 import java.sql.*;
 import daointerfaces01917.DALException;
 import daointerfaces01917.OperatoerDAO;
+import dto01917.FarmaceutDTO;
 import dto01917.OperatoerDTO;
 
 public class MySQLOperatoerDAO implements OperatoerDAO {
@@ -18,13 +19,25 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 	
 	public OperatoerDTO getOperatoer(int oprId) throws DALException {
 		
+		
 	    try {
-	    	ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM operatoer WHERE opr_id = " + oprId);
-	    	if (!rs.first()) throw new DALException("Operatoeren, " + oprId + ", findes ikke.");
-	    	return new OperatoerDTO (rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
+	    	
+	    	 CallableStatement getOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_operatoer(?)");
+			    getOP.setInt(1, oprId);
+			    ResultSet rs = getOP.executeQuery();
+			    if (rs.first()){			    	
+			    	String opr_navn = rs.getString(2);
+			    	String opr_ini = rs.getString(3);
+			    	String opr_cpr = rs.getString(4);
+			    	String opr_password = rs.getString(5);
+			    	
+			    	OperatoerDTO newopr = new OperatoerDTO(opr_navn, opr_ini, opr_cpr, opr_password);
+			    	newopr.setOprId(oprId);
+			    	return newopr;
+			    }
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
-	    
+	    return null;
 		
 	}
 	
@@ -82,13 +95,17 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 		
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM operatoer");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_Operatoer");
 			while (rs.next()) 
 			{
-				// list.add(new OperatoerDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password")));
+				OperatoerDTO current = new OperatoerDTO(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				current.setOprId(rs.getInt(1));
+				list.add(current);
+				 
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
+		System.out.println("Operatoerer \n");
 		return list;
 	}
 		
