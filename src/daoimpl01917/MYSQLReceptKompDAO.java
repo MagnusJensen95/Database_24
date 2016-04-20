@@ -79,21 +79,32 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 
 	@Override
 	public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+		
 		try {
-			Connector.getInstance()
-					.doUpdate(" Insert into receptkomponent (recept_id, raavare_id, nom_netto, tolerance) VALUES ("
-							+ receptkomponent.getReceptId() + ", " + receptkomponent.getRaavareId() + ", "
-							+ receptkomponent.getNomNetto() + ", " + receptkomponent.getTolerance() + ")");
-
-		} catch (Exception e) {
-
-		}
-
+		    CallableStatement createRecept = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_receptkomponent(?,?,?,?)");
+		    createRecept.setInt(1, receptkomponent.getReceptId());
+		    createRecept.setInt(2, receptkomponent.getRaavareId());
+		    createRecept.setDouble(3, receptkomponent.getNomNetto());
+		    createRecept.setDouble(4, receptkomponent.getTolerance());
+		    createRecept.execute();
+		   } catch (Exception e) {
+			   e.printStackTrace();
+			   System.out.println("Cannot create receptkomponent");
+		  }
 	}
 
 	@Override
 	public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
-
+		try {
+			Connector.getInstance().doUpdate(
+					"UPDATE receptkomponent SET  raavare_id = " + receptkomponent.getRaavareId()
+					+ ", nom_netto =  " + receptkomponent.getNomNetto()
+					+ ", tolerance = " + receptkomponent.getTolerance()+ " WHERE recept_id = " +
+					receptkomponent.getReceptId());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 
 }

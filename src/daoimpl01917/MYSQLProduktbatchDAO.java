@@ -60,24 +60,15 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 
 	@Override
 	public void createProduktBatch(ProduktBatchDTO produktbatch) throws SQLException {
-		   try {
-			
-		  
+		try {
 		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_produktbatch(?,?)");
 		    createOP.setInt(1, produktbatch.getStatus());
 		    createOP.setInt(2, produktbatch.getReceptId());
 		    createOP.execute();
-		    
-		
-		    
-		   } catch (SQLException e) {
-			
+		} catch (SQLException e) {
 		    System.out.println("Cannot create produktbatch, check wether or not the referenced Recept_id exists");
-		    
-		    
-		   }
-		
-		 }
+		}
+	}
 
 	@Override
 	//does not need correct implementation according to cdio_final

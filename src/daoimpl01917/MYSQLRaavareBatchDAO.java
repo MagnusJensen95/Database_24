@@ -1,5 +1,6 @@
 package daoimpl01917;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RaavareBatchDAO;
 import dto01917.OperatoerDTO;
+import dto01917.ProduktBatchDTO;
 import dto01917.RaavareBatchDTO;
 
 public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
@@ -18,11 +20,18 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 	@Override
 	public RaavareBatchDTO getRaavareBatch(int rbId) throws DALException {
 		try {
-	    	ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM raavarebatch WHERE rb_id = " + rbId);
-	    	if (!rs.first()) throw new DALException("Raavarebatch " + rbId + " findes ikke");
-	    	return new RaavareBatchDTO (rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"));
+	    	 CallableStatement getRB = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_raavarebatch(?)");
+			    getRB.setInt(1, rbId);
+			    ResultSet rs = getRB.executeQuery();
+			    if (rs.first()){			    	
+			    	int raavare_id = rs.getInt(2);
+			    	double maengde = rs.getDouble(3);
+			    	RaavareBatchDTO newpb = new RaavareBatchDTO(rbId, raavare_id, maengde);
+			    	return newpb;
+			    }
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
+	    return null;
 	}
 
 	@Override
@@ -31,41 +40,51 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 		
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM raavarebatch");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_raavarebatch");
 			while (rs.next()) 
 			{
-				list.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde")));
+				RaavareBatchDTO current = new RaavareBatchDTO(rs.getInt(1), rs.getInt(2), rs.getDouble(3));
+				list.add(current);
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
+		System.out.println("Produktbatches: \n");
 		return list;
 	}
 
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException {
 		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
-		
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM raavarebatch where raavare_id = " + raavareId);
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_raavarebatch where raavare_id = "+raavareId);
 			while (rs.next()) 
 			{
-				list.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maenge")));
+				RaavareBatchDTO current = new RaavareBatchDTO(rs.getInt(1), rs.getInt(2), rs.getDouble(3));
+				list.add(current);
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
+		System.out.println("Produktbatches: \n");
 		return list;
 	}
 
 	@Override
 	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
 		try {
-			Connector.getInstance().doUpdate(
-				"INSERT INTO raavarebatch(rb_id, raavare_id, maengde) VALUES " +
-				"(" + raavarebatch.getRbId() + ", " + raavarebatch.getRaavareId() + ", " + raavarebatch.getMaengde() + ")"
-					);
+		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_raavarebatch(?,?)");
+		    createOP.setInt(1, raavarebatch.getRaavareId());
+		    createOP.setDouble(2, raavarebatch.getMaengde());
+		    createOP.execute();
+		    int id = 0;
+		    ResultSet rs = Connector.getInstance().doQuery("select max(rb_id) from view_raavarebatch;");
+			if (rs.first()){   
+				id =rs.getInt(1);		
+			}
+			raavarebatch.setRbId(id);
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+		    System.out.println("Cannot create raavarebatch, check wether or not the referenced Recept_id exists");
 		}
 	}
 
