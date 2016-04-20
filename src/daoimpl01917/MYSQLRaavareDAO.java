@@ -20,7 +20,7 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 	@Override
 	public RaavareDTO getRaavare(int raavareId) throws DALException {
 		try {
-			CallableStatement getraavare = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_recept(?)");
+			CallableStatement getraavare = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_raavare(?)");
 			getraavare.setInt(1, raavareId);
 			ResultSet rs = getraavare.executeQuery();
 			if (rs.first()){			    	
@@ -77,17 +77,6 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 			   e.printStackTrace();
 		    System.out.println("Cannot create recept");
 		   }
-		/*
-		try {
-			Connector.getInstance().doUpdate(" Insert into raavare (raavare_id, raavare_navn, leverandoer) VALUES ("
-					+raavare.getRaavareId()+ ", '"
-					+raavare.getRaavareNavn() + "', '"
-					+raavare.getLeverandoer() + "')");
-						
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		*/
 	}
 
 	@Override

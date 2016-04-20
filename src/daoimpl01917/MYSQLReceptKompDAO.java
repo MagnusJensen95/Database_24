@@ -21,6 +21,7 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 			CallableStatement getReceptKomponent = (CallableStatement) Connector.getInstance().getConnection()
 					.prepareCall("call get_receptkomponent(?,?)");
 			getReceptKomponent.setInt(1, receptId);
+			getReceptKomponent.setInt(2, raavareId);
 			ResultSet rs = getReceptKomponent.executeQuery();
 			if (rs.first()) {
 				int recept_id = rs.getInt(1);
@@ -97,10 +98,9 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 	public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
 		try {
 			Connector.getInstance().doUpdate(
-					"UPDATE receptkomponent SET  raavare_id = " + receptkomponent.getRaavareId()
-					+ ", nom_netto =  " + receptkomponent.getNomNetto()
+					"UPDATE receptkomponent SET nom_netto =  " + receptkomponent.getNomNetto()
 					+ ", tolerance = " + receptkomponent.getTolerance()+ " WHERE recept_id = " +
-					receptkomponent.getReceptId());
+					receptkomponent.getReceptId() +" and raavare_id = "+receptkomponent.getRaavareId());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

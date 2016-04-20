@@ -21,9 +21,9 @@ public class Main {
 	public static void main(String[] args) throws DALException {
 		
 		
-//		MYSQLRaavareDAO raav = new MYSQLRaavareDAO();
-//		MYSQLRaavareBatchDAO raavBatch = new MYSQLRaavareBatchDAO();
-//		MYSQLReceptKompDAO receptKomp = new MYSQLReceptKompDAO();
+		MYSQLRaavareDAO raav = new MYSQLRaavareDAO();
+		MYSQLRaavareBatchDAO raavBatch = new MYSQLRaavareBatchDAO();
+		MYSQLReceptKompDAO receptKomp = new MYSQLReceptKompDAO();
 		MYSQLReceptDAO recept = new MYSQLReceptDAO();
 		MYSQLProduktBatchKompDAO produktBatchKomp = new MYSQLProduktBatchKompDAO();
 		MYSQLProduktbatchDAO produktBatch = new MYSQLProduktbatchDAO();
@@ -32,37 +32,41 @@ public class Main {
 		MySQLFarmaceutDAO farmaceut = new MySQLFarmaceutDAO();
 		
 
-//		RaavareDTO nyraa = new RaavareDTO(8, "Jensen", "Plebias");
-//		try {
-//			raav.createRaavare(nyraa);
-//			nyraa.setRaavareNavn("Frantsen");
-//			raav.updateRaavare(nyraa);
-//			if(!raav.getRaavare(8).getRaavareNavn().equals("Frantsen")){
-//				throw new DALException("Doesnt Match name, error in raavare getName");
-//			}
-//			List<RaavareDTO> liste = raav.getRaavareList();
-//			for(RaavareDTO e : liste){
-//				System.out.println("Id: "+e.getRaavareId()+" & name: "+e.getRaavareNavn());
-//			}
-//		} catch (DALException e) {
-//			e.printStackTrace();
-//			System.out.println("Error in raavare.");
-//		}
+		RaavareDTO nyraa = new RaavareDTO(8, "Jensen", "Plebias");
+		try {
+			raav.createRaavare(nyraa);
+			nyraa.setRaavareNavn("Frantsen");
+			raav.updateRaavare(nyraa);
+			if(!raav.getRaavare(8).getRaavareNavn().equals("Frantsen")){
+				throw new DALException("Doesnt Match name, error in raavare getName");
+			}
+			else{
+				System.out.println("and his name is.... frantsen!");
+			}
+			List<RaavareDTO> liste = raav.getRaavareList();
+			for(RaavareDTO e : liste){
+				System.out.println("Id: "+e.getRaavareId()+" & name: "+e.getRaavareNavn());
+			}
+		} catch (DALException e) {
+			e.printStackTrace();
+			System.out.println("Error in raavare.");
+		}
 //		
-//		RaavareBatchDTO raavareBatchDTO = new RaavareBatchDTO(8, 8, 100);
-//		try{
-//			raavBatch.createRaavareBatch(raavareBatchDTO);
-//			raavareBatchDTO.setMaengde(500);
-//			raavBatch.updateRaavareBatch(raavareBatchDTO);
+		RaavareBatchDTO raavareBatchDTO = new RaavareBatchDTO(8, 8, 100);
+		try{
+			raavBatch.createRaavareBatch(raavareBatchDTO);
+			raavareBatchDTO.setMaengde(500);
+			raavBatch.updateRaavareBatch(raavareBatchDTO);
 //			raavBatch.getRaavareBatch(8);
-//			List<RaavareBatchDTO> liste = raavBatch.getRaavareBatchList();
-//			for(RaavareBatchDTO e : liste){
-//				System.out.println("Id: "+e.getRbId()+" & m�ngde: "+e.getMaengde());
-//			}
-//			
-//		} catch (DALException e){
-//			e.printStackTrace();
-//		}
+			System.out.println("raavarebatch: "+raavareBatchDTO.getMaengde());
+			List<RaavareBatchDTO> liste = raavBatch.getRaavareBatchList();
+			for(RaavareBatchDTO e : liste){
+				System.out.println("Id: "+e.getRbId()+" & m�ngde: "+e.getMaengde());
+			}
+			
+		} catch (DALException e){
+			e.printStackTrace();
+		}
 		
 		OperatoerDTO operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
 		OperatoerDTO operatoerDTO2 = new OperatoerDTO("jensen", "PN", "121291-1212", "suckit");
@@ -122,19 +126,20 @@ public class Main {
 	
 		
 		
-//		ReceptKompDTO receptKompDTO = new ReceptKompDTO(4, 8, 20, 0.1);
-//		try{
-//			receptKomp.createReceptKomp(receptKompDTO);
-//			receptKompDTO.setNomNetto(50.0);
-//			receptKomp.updateReceptKomp(receptKompDTO);
+		ReceptKompDTO receptKompDTO = new ReceptKompDTO(3, 2, 20, 0.1);
+		try{
+			receptKomp.createReceptKomp(receptKompDTO);
+			receptKompDTO.setNomNetto(50.0);
+			receptKomp.updateReceptKomp(receptKompDTO);
 //			receptKomp.getReceptKompList(4);
-//			List<ReceptKompDTO> liste = receptKomp.getReceptKompList();
-//			for(ReceptKompDTO e : liste){
-//				System.out.println("recept_Id: "+e.getReceptId()+" & raavare_id: "+e.getRaavareId()+" & netto: "+e.getNomNetto());
-//			}
-//		} catch (DALException e){
-//			e.printStackTrace();
-//		}
+			System.out.println(receptKomp.getReceptKomp(3, 2).getNomNetto());
+			List<ReceptKompDTO> liste = receptKomp.getReceptKompList();
+			for(ReceptKompDTO e : liste){
+				System.out.println("recept_Id: "+e.getReceptId()+" & raavare_id: "+e.getRaavareId()+" & netto: "+e.getNomNetto());
+			}
+		} catch (DALException e){
+			e.printStackTrace();
+		}
 //		
 		ReceptDTO receptDTO = new ReceptDTO("Plebnus");
 		try{
