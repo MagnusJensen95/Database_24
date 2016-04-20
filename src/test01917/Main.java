@@ -18,15 +18,15 @@ import java.util.List;
 import connector01917.Connector;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DALException {
 		
 		
 //		MYSQLRaavareDAO raav = new MYSQLRaavareDAO();
 //		MYSQLRaavareBatchDAO raavBatch = new MYSQLRaavareBatchDAO();
 //		MYSQLReceptKompDAO receptKomp = new MYSQLReceptKompDAO();
-//		MYSQLReceptDAO recept = new MYSQLReceptDAO();
-//		MYSQLProduktBatchKompDAO produktBatchKomp = new MYSQLProduktBatchKompDAO();
-//		MYSQLProduktbatchDAO produktBatch = new MYSQLProduktbatchDAO();
+		MYSQLReceptDAO recept = new MYSQLReceptDAO();
+		MYSQLProduktBatchKompDAO produktBatchKomp = new MYSQLProduktBatchKompDAO();
+		MYSQLProduktbatchDAO produktBatch = new MYSQLProduktbatchDAO();
 		MySQLOperatoerDAO operatoer = new MySQLOperatoerDAO();
 		MySQLVaerkfoererDAO vaerkfoerer = new MySQLVaerkfoererDAO();
 		MySQLFarmaceutDAO farmaceut = new MySQLFarmaceutDAO();
@@ -110,7 +110,7 @@ public class Main {
 //			FarmaceutDTO.setPassword("JegMar,erennoob");
 //			FarmaceutDTO.setIni("KM");
 			farmaceut.updateFarmaceut(FarmaceutDTO2, FarmaceutDTO.getfarmId());
-//			Farmaceut.getFarmaceut(5);
+			System.out.println(farmaceut.getFarmaceut(5));
 			List<FarmaceutDTO> liste = farmaceut.getFarmaceutList();
 			for(FarmaceutDTO e : liste){
 				System.out.println(e.toString());
@@ -119,15 +119,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 //		ReceptKompDTO receptKompDTO = new ReceptKompDTO(4, 8, 20, 0.1);
@@ -144,46 +136,49 @@ public class Main {
 //			e.printStackTrace();
 //		}
 //		
-//		ReceptDTO receptDTO = new ReceptDTO(4, "Plebnus");
-//		try{
-//			recept.createRecept(receptDTO);
+		ReceptDTO receptDTO = new ReceptDTO("Plebnus");
+		try{
+			recept.createRecept(receptDTO);
 //			receptDTO.setReceptNavn("Frantsen");
 //			recept.updateRecept(receptDTO);
-//			recept.getRecept(4);
-//			List<ReceptDTO> liste = recept.getReceptList();
-//			for(ReceptDTO e : liste){
-//				System.out.println("Id: "+e.getReceptId()+" & navn: "+e.getReceptNavn());
-//			}
-//		} catch (DALException e){
-//			e.printStackTrace();
-//		}
+			System.out.println(recept.getRecept(4).toString());
+			List<ReceptDTO> liste = recept.getReceptList();
+			for(ReceptDTO e : liste){
+				System.out.println(e.toString());
+			}
+		} catch (DALException e){
+			e.printStackTrace();
+		}
 //		
-//		ProduktBatchKompDTO produktBatchKompDTO = new ProduktBatchKompDTO(5, 8, 0.5, 100, 5);
-//		try{
-//			produktBatchKomp.createProduktBatchKomp(produktBatchKompDTO);
+		ProduktBatchKompDTO produktBatchKompDTO = new ProduktBatchKompDTO(5, 8, 0.5, 100, 5);
+		try{
+			produktBatchKomp.createProduktBatchKomp(produktBatchKompDTO);
 //			produktBatchKompDTO.setNetto(200);
 //			produktBatchKomp.updateProduktBatchKomp(produktBatchKompDTO);
-//			produktBatchKomp.getProduktBatchKompList(5);
-//			List<ProduktBatchKompDTO> liste = produktBatchKomp.getProduktBatchKompList();
-//			for(ProduktBatchKompDTO e : liste){
-//				System.out.println("pb_Id: "+e.getPbId()+" & rb_Id: "+e.getRbId()+" & opr_id: "+e.getOprId()+" & netto: "+e.getNetto());
-//			}
-//		} catch (DALException e){
-//			e.printStackTrace();
-//		}
+			System.out.println(produktBatchKomp.getProduktBatchKompList(5));
+			List<ProduktBatchKompDTO> liste = produktBatchKomp.getProduktBatchKompList();
+			for(ProduktBatchKompDTO e : liste){
+				System.out.println(e.toString());
+			}
+	} catch (DALException e){
+			e.printStackTrace();
+		}
 //		
-//		ProduktBatchDTO produktBatchDTO = new ProduktBatchDTO(6, 3, 4);
-//		try{
-//			produktBatch.createProduktBatch(produktBatchDTO);
+		ProduktBatchDTO produktBatchDTO = new ProduktBatchDTO(3, 2);
+		try{
+			produktBatch.createProduktBatch(produktBatchDTO);
 //			produktBatchDTO.setStatus(10);
 //			produktBatch.updateProduktBatch(produktBatchDTO);
-//			produktBatch.getProduktBatch(6);
-//			List<ProduktBatchDTO> liste = produktBatch.getProduktBatchList();
-//			for(ProduktBatchDTO e : liste){
-//				System.out.println("pb_Id: "+e.getPbId()+" & status: "+e.getStatus()+" & recept_id: "+e.getReceptId());
-//			}
-//		} catch (DALException e){
-//			e.printStackTrace();
-//		}
+			System.out.println(produktBatch.getProduktBatch(4).toString());
+			List<ProduktBatchDTO> liste = produktBatch.getProduktBatchList();
+			for(ProduktBatchDTO e : liste){
+			System.out.println(e.toString());
+			}
+		} catch (DALException e){
+			e.printStackTrace();
+		}
+		 catch (SQLException f){
+				f.printStackTrace();
+			}
 	}
-}
+	}

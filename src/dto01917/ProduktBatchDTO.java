@@ -6,8 +6,7 @@ public class ProduktBatchDTO {
 	int status; // 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
 	int receptId;
 
-	public ProduktBatchDTO(int pbId, int status, int receptId) {
-		this.pbId = pbId;
+	public ProduktBatchDTO(int status, int receptId) {
 		this.status = status;
 		this.receptId = receptId;
 	}

@@ -15,8 +15,7 @@ public class ReceptDTO {
 
 	/** liste af kompenenter i recepten */
 
-	public ReceptDTO(int receptId, String receptNavn) {
-		this.receptId = receptId;
+	public ReceptDTO(String receptNavn) {
 		this.receptNavn = receptNavn;
 	}
 

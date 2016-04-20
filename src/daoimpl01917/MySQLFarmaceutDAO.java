@@ -65,9 +65,6 @@ public class MySQLFarmaceutDAO implements FarmaceutDAO {
 		    
 		    
 		   }
-		   finally {
-		    
-		   }
 		 }
 	
 	public void updateFarmaceut(FarmaceutDTO farm, int id) throws DALException {
