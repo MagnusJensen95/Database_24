@@ -155,7 +155,7 @@ public class Main {
 			e.printStackTrace();
 		}
 //		
-		ProduktBatchKompDTO produktBatchKompDTO = new ProduktBatchKompDTO(5, 8, 0.5, 100, 5);
+		ProduktBatchKompDTO produktBatchKompDTO = new ProduktBatchKompDTO(2, 3, 0.5, 100, 5);
 		try{
 			produktBatchKomp.createProduktBatchKomp(produktBatchKompDTO);
 //			produktBatchKompDTO.setNetto(200);

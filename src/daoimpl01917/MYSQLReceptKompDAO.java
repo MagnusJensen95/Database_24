@@ -82,12 +82,22 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 	public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
 		
 		try {
-		    CallableStatement createRecept = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_receptkomponent(?,?,?,?)");
+		    CallableStatement createRecept = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_receptkomponent(?,?,?,?,?)");
 		    createRecept.setInt(1, receptkomponent.getReceptId());
 		    createRecept.setInt(2, receptkomponent.getRaavareId());
 		    createRecept.setDouble(3, receptkomponent.getNomNetto());
 		    createRecept.setDouble(4, receptkomponent.getTolerance());
+		    createRecept.setInt(5, 0);
 		    createRecept.execute();
+		    
+		    if (createRecept.getInt(5) == 1){
+		    	System.out.println("ggWP");
+		    }
+		    else 
+		    	System.out.println("Pleb det må du ikke");
+			
+		    
+		   
 		   } catch (Exception e) {
 			   e.printStackTrace();
 			   System.out.println("Cannot create receptkomponent");

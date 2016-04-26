@@ -72,10 +72,20 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 	@Override
 	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
 		try {
-		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_raavarebatch(?,?)");
+		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_raavarebatch(?,?,?)");
 		    createOP.setInt(1, raavarebatch.getRaavareId());
 		    createOP.setDouble(2, raavarebatch.getMaengde());
+		    createOP.setInt(3, 0);
 		    createOP.execute();
+		    
+		    if (createOP.getInt(3) == 1){
+		    	System.out.println("ggWP");
+		    }
+		    else 
+		    	System.out.println("Pleb det må du ikke");
+			
+		   
+		    
 		    int id = 0;
 		    ResultSet rs = Connector.getInstance().doQuery("select max(rb_id) from view_raavarebatch;");
 			if (rs.first()){   
@@ -83,7 +93,10 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 			}
 			raavarebatch.setRbId(id);
 			
-		} catch (SQLException e) {
+		}
+		
+		
+		catch (SQLException e) {
 		    System.out.println("Cannot create raavarebatch, check wether or not the referenced Recept_id exists");
 		}
 	}

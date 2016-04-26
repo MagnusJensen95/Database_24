@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ReceptDAO;
@@ -83,4 +85,21 @@ public class MYSQLReceptDAO implements ReceptDAO{
 		
 	}
 
+	@Override
+	public ResultSet getFullRecept() {
+		try {
+			ResultSet getFullRecept = Connector.getInstance().doQuery("Select * from view_fuldrecept");
+			
+		
+			if (getFullRecept.first()){			    	
+				return getFullRecept;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
+	
 }

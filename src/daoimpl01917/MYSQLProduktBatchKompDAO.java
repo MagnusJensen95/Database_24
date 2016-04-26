@@ -89,13 +89,19 @@ public class MYSQLProduktBatchKompDAO implements ProduktBatchKompDAO {
 	public void createProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException {
 		   try {
 		   
-		    CallableStatement createPBKomp = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_produktbatchkomponent(?,?,?,?,?)");
+		    CallableStatement createPBKomp = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_produktbatchkomponent(?,?,?,?,?,?)");
 		    createPBKomp.setInt(1, produktbatchkomponent.getPbId());
 		    createPBKomp.setInt(2, produktbatchkomponent.getRbId());
 		    createPBKomp.setDouble(3, produktbatchkomponent.getTara());
 		    createPBKomp.setDouble(4, produktbatchkomponent.getNetto());
 		    createPBKomp.setInt(5, produktbatchkomponent.getOprId());
+		    createPBKomp.setInt(6, 0);
 		    createPBKomp.execute();
+		    if (createPBKomp.getInt(6) == 1){
+		    	System.out.println("ggWP");
+		    }
+		    else 
+		    	System.out.println("Pleb det må du ikke");
 			
 		    
 		   } catch (Exception e) {

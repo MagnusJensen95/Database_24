@@ -1,5 +1,6 @@
 package daointerfaces01917;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import dto01917.ReceptDTO;
@@ -12,4 +13,6 @@ public interface ReceptDAO {
 	void createRecept(ReceptDTO recept) throws DALException;
 
 	void updateRecept(ReceptDTO recept) throws DALException;
+	
+	ResultSet getFullRecept();
 }
