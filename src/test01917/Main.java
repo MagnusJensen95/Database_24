@@ -61,7 +61,7 @@ public class Main {
 			System.out.println("raavarebatch: "+raavareBatchDTO.getMaengde());
 			List<RaavareBatchDTO> liste = raavBatch.getRaavareBatchList();
 			for(RaavareBatchDTO e : liste){
-				System.out.println("Id: "+e.getRbId()+" & m�ngde: "+e.getMaengde());
+				System.out.println("Id: "+e.getRbId()+" & mængde: "+e.getMaengde());
 			}
 			
 		} catch (DALException e){

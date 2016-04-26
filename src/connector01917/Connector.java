@@ -10,7 +10,7 @@ import java.sql.Statement;
 /** @author Gruppe_24 */
 public class Connector {
 	private static Connector conn = null;
-    private static final String HOST     = "Localhost";
+    private static final String HOST     = "localhost";
     private static final int    PORT     = 3306;
     private static final String DATABASE = "cdio_db";
     private static final String USERNAME = "root"; 

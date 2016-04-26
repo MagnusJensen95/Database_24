@@ -12,15 +12,15 @@ public class FarmaceutDTO {
 	 * Farmaceut-identifikationsnummer (farm_id) i omraadet 1-99999999. Vaelges
 	 * af brugerne
 	 */
-	int farmId;
+	private int farmId;
 	/** Farmaceutnavn (farm_navn) min. 2 max. 20 karakterer */
-	String farmNavn;
+	private String farmNavn;
 	/** Farmaceut-initialer min. 2 max. 3 karakterer */
-	String ini;
+	private String ini;
 	/** Farmaceut cpr-nr 10 karakterer */
-	String cpr;
+	private String cpr;
 	/** Farmaceut password min. 7 max. 8 karakterer */
-	String password;
+	private String password;
 
 	public FarmaceutDTO(String farmNavn, String ini, String cpr, String password) {
 
