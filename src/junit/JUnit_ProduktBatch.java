@@ -5,28 +5,23 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLProduktbatchDAO;
-import daoimpl01917.MySQLOperatoerDAO;
+import daoimpl01917.MYSQLProduktBatchDAO;
 import daointerfaces01917.DALException;
-import daointerfaces01917.ProduktBatchDAO;
-import dto01917.OperatoerDTO;
 import dto01917.ProduktBatchDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class JUnit_Produktbatch {
+public class JUnit_ProduktBatch {
 
-	private static MYSQLProduktbatchDAO produktbatch;
+	private static MYSQLProduktBatchDAO produktbatch;
 	private static ProduktBatchDTO produktbatchDTO;
 	
 	@Test
 	public void a_getListProduktbatch(){
-		produktbatch = new MYSQLProduktbatchDAO();
+		produktbatch = new MYSQLProduktBatchDAO();
 		produktbatchDTO = new ProduktBatchDTO(3, 2);
 		try {
 			List<ProduktBatchDTO> liste = produktbatch.getProduktBatchList();
@@ -59,7 +54,7 @@ public class JUnit_Produktbatch {
 		}
 		try {
 			produktbatch.createProduktBatch(produktbatchDTO);
-		} catch (SQLException e) {
+		} catch (DALException e) {
 			fail("Could not create produktbatch");
 		}
 	}

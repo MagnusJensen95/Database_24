@@ -26,7 +26,7 @@ public class Main {
 		MYSQLReceptKompDAO receptKomp = new MYSQLReceptKompDAO();
 		MYSQLReceptDAO recept = new MYSQLReceptDAO();
 		MYSQLProduktBatchKompDAO produktBatchKomp = new MYSQLProduktBatchKompDAO();
-		MYSQLProduktbatchDAO produktBatch = new MYSQLProduktbatchDAO();
+		MYSQLProduktBatchDAO produktBatch = new MYSQLProduktBatchDAO();
 		MySQLOperatoerDAO operatoer = new MySQLOperatoerDAO();
 		MySQLVaerkfoererDAO vaerkfoerer = new MySQLVaerkfoererDAO();
 		MySQLFarmaceutDAO farmaceut = new MySQLFarmaceutDAO();
@@ -182,8 +182,5 @@ public class Main {
 		} catch (DALException e){
 			e.printStackTrace();
 		}
-		 catch (SQLException f){
-				f.printStackTrace();
-			}
 	}
 	}

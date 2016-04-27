@@ -119,7 +119,7 @@ public class MYSQLProduktBatchKompDAO implements ProduktBatchKompDAO {
 					"UPDATE produktbatchkomponent SET  tara= " + produktbatchkomponent.getTara()
 					+ ", netto =  " + produktbatchkomponent.getNetto()
 					+ ", opr_id = " + produktbatchkomponent.getOprId()+ " WHERE pb_id = " +
-					produktbatchkomponent.getPbId() + " and rb_id  = " + produktbatchkomponent.getPbId());
+					produktbatchkomponent.getPbId() + " and rb_id  = " + produktbatchkomponent.getRbId()+";");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

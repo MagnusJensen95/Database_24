@@ -11,7 +11,7 @@ import daointerfaces01917.ProduktBatchDAO;
 import dto01917.OperatoerDTO;
 import dto01917.ProduktBatchDTO;
 
-public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
+public class MYSQLProduktBatchDAO implements ProduktBatchDAO{
 
 	
 	
@@ -58,7 +58,7 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 	}
 
 	@Override
-	public void createProduktBatch(ProduktBatchDTO produktbatch) throws SQLException {
+	public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
 		try {
 		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_produktbatch(?,?)");
 		    createOP.setInt(1, produktbatch.getStatus());
