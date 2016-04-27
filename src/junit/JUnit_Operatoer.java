@@ -1,0 +1,96 @@
+package junit;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+import daoimpl01917.MySQLOperatoerDAO;
+import daointerfaces01917.DALException;
+import dto01917.OperatoerDTO;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class JUnit_Operatoer {
+
+	private static MySQLOperatoerDAO operatoer;
+	private static OperatoerDTO operatoerDTO;
+	
+	@Test
+	public void agetListOperatoer(){
+		operatoer = new MySQLOperatoerDAO();
+		operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
+		try {
+			List<OperatoerDTO> listtest = operatoer.getOperatoerList();
+			if(listtest == null){
+				fail("Gotten list is null!");
+			}
+			else{
+				if(listtest.size() == 0){
+					fail("Either database is empty, or couldnt get proper list!");
+				}
+			}
+		} catch (DALException e) {
+			fail("Could not get list of operatoers!");
+		}
+	}
+	
+	@Test
+	public void baddOperatoer(){
+		try {
+			List<OperatoerDTO> listTest = operatoer.getOperatoerList();
+			for(int i = 0; i < listTest.size(); i++){
+				if(listTest.get(i).getOprNavn().equals(operatoerDTO.getOprNavn())){
+					if(listTest.get(i).getCpr().equals(operatoerDTO.getCpr())){
+						fail("Already exist operatoer with those and cant add!");
+					}
+				}
+			}
+		} catch (DALException e1) {
+			fail("failed in getting list for addoperatoer");
+		}
+		try {
+			operatoer.createOperatoer(operatoerDTO);
+		} catch (DALException e) {
+			fail("Could not createoperatoer");
+		}
+	}
+
+	@Test
+	public void cgetOperatoer() {
+		try {
+			OperatoerDTO test = operatoer.getOperatoer(operatoerDTO.getOprId());
+			if(test != null){
+				if(!test.getOprNavn().equals(operatoerDTO.getOprNavn())){
+					fail("Gotten operatoer not equal to DTO");
+				}
+			}
+			else{
+				fail("Gotten operatoer is null!");
+			}
+		} catch (DALException e) {
+			fail("Could not get operatoer!");
+		}
+	}
+	
+	@Test
+	public void dupdateOperatoer(){
+		OperatoerDTO testSecond = new OperatoerDTO("Testnus", "TN", "131292-1313", "testpass");
+		try {
+			operatoer.updateOperatoer(testSecond, operatoerDTO.getOprId());
+			OperatoerDTO temp = operatoer.getOperatoer(operatoerDTO.getOprId());
+			assertEquals(testSecond.getCpr(), temp.getCpr());
+		} catch (DALException e) {
+			fail("error getting updating operatoer!");
+		}
+	}
+	
+	
+	
+	
+
+}

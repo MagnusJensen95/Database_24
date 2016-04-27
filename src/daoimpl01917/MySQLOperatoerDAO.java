@@ -33,6 +33,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 			    	
 			    	OperatoerDTO newopr = new OperatoerDTO(opr_navn, opr_ini, opr_cpr, opr_password);
 			    	newopr.setOprId(oprId);
+			    	System.out.println("finised!");
 			    	return newopr;
 			    }
 	    }
@@ -42,35 +43,24 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 	}
 	
 	public void createOperatoer(OperatoerDTO opr) throws DALException {  
-		   try {
-			   int id = 0;
-		    //Connector.getInstance().getConnection().setAutoCommit(false);
-		    CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_operatoer(?,?,?,?)");
-		    createOP.setString(1, opr.getOprNavn());
-		    createOP.setString(2, opr.getIni());
-		    createOP.setString(3, opr.getCpr());
-		    createOP.setString(4, opr.getPassword());
-		    createOP.execute();
-		    //Connector.getInstance().getConnection().commit();
-		    
-		    ResultSet rs = Connector.getInstance().doQuery("select max(opr_id) from operatoer;");
-		    if (rs.first())
-		
-		    
-			id = Integer.parseInt(rs.getString(1));							
-			opr.setOprId(id);
-			
-		    
-		   } catch (Exception e) {
-			   e.printStackTrace();
-		    System.out.println("Cannot create operator");
-		    //Connector.getInstance().getConnection().rollback();
-		    
-		   }
-		   finally {
-		    //Connector.getInstance().getConnection().setAutoCommit(true);
-		   }
-		 }
+		try {
+			int id = 0;
+			CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_operatoer(?,?,?,?)");
+			createOP.setString(1, opr.getOprNavn());
+			createOP.setString(2, opr.getIni());
+			createOP.setString(3, opr.getCpr());
+			createOP.setString(4, opr.getPassword());
+			createOP.execute();   
+			ResultSet rs = Connector.getInstance().doQuery("select max(opr_id) from operatoer;");
+			if (rs.first()){
+				id = rs.getInt(1);
+				opr.setOprId(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Cannot create operator");
+		}
+	}
 	
 	public void updateOperatoer(OperatoerDTO opr, int id) throws DALException {
 		try {
