@@ -54,7 +54,6 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
-		System.out.println("Produktbatches: \n");
 		return list;
 	}
 
@@ -65,6 +64,13 @@ public class MYSQLProduktbatchDAO implements ProduktBatchDAO{
 		    createOP.setInt(1, produktbatch.getStatus());
 		    createOP.setInt(2, produktbatch.getReceptId());
 		    createOP.execute();
+		    
+		    ResultSet rs = Connector.getInstance().doQuery("select max(pb_id) from produktbatch;");
+			if (rs.first()){
+				int id = rs.getInt(1);
+				produktbatch.setPbId(id);
+			}
+		    
 		} catch (SQLException e) {
 		    System.out.println("Cannot create produktbatch, check wether or not the referenced Recept_id exists");
 		}

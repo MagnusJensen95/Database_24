@@ -98,7 +98,4 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 		System.out.println("Operatoerer \n");
 		return list;
 	}
-		
-		
 }
-	

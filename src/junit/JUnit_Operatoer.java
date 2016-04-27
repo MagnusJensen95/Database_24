@@ -21,7 +21,7 @@ public class JUnit_Operatoer {
 	private static OperatoerDTO operatoerDTO;
 	
 	@Test
-	public void agetListOperatoer(){
+	public void a_getListOperatoer(){
 		operatoer = new MySQLOperatoerDAO();
 		operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
 		try {
@@ -40,7 +40,7 @@ public class JUnit_Operatoer {
 	}
 	
 	@Test
-	public void baddOperatoer(){
+	public void b_addOperatoer(){
 		try {
 			List<OperatoerDTO> listTest = operatoer.getOperatoerList();
 			for(int i = 0; i < listTest.size(); i++){
@@ -61,7 +61,7 @@ public class JUnit_Operatoer {
 	}
 
 	@Test
-	public void cgetOperatoer() {
+	public void c_getOperatoer() {
 		try {
 			OperatoerDTO test = operatoer.getOperatoer(operatoerDTO.getOprId());
 			if(test != null){
@@ -78,7 +78,7 @@ public class JUnit_Operatoer {
 	}
 	
 	@Test
-	public void dupdateOperatoer(){
+	public void d_updateOperatoer(){
 		OperatoerDTO testSecond = new OperatoerDTO("Testnus", "TN", "131292-1313", "testpass");
 		try {
 			operatoer.updateOperatoer(testSecond, operatoerDTO.getOprId());
@@ -88,9 +88,4 @@ public class JUnit_Operatoer {
 			fail("error getting updating operatoer!");
 		}
 	}
-	
-	
-	
-	
-
 }
