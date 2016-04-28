@@ -27,9 +27,9 @@ public class Main {
 		MYSQLReceptDAO recept = new MYSQLReceptDAO();
 		MYSQLProduktBatchKompDAO produktBatchKomp = new MYSQLProduktBatchKompDAO();
 		MYSQLProduktBatchDAO produktBatch = new MYSQLProduktBatchDAO();
-		MySQLOperatoerDAO operatoer = new MySQLOperatoerDAO();
-		MySQLVaerkfoererDAO vaerkfoerer = new MySQLVaerkfoererDAO();
-		MySQLFarmaceutDAO farmaceut = new MySQLFarmaceutDAO();
+		MYSQLOperatoerDAO operatoer = new MYSQLOperatoerDAO();
+		MYSQLVaerkfoererDAO vaerkfoerer = new MYSQLVaerkfoererDAO();
+		MYSQLFarmaceutDAO farmaceut = new MYSQLFarmaceutDAO();
 		
 
 		RaavareDTO nyraa = new RaavareDTO(8, "Jensen", "Plebias");

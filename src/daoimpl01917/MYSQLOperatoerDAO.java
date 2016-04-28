@@ -13,7 +13,7 @@ import daointerfaces01917.OperatoerDAO;
 import dto01917.FarmaceutDTO;
 import dto01917.OperatoerDTO;
 
-public class MySQLOperatoerDAO implements OperatoerDAO {
+public class MYSQLOperatoerDAO implements OperatoerDAO {
 	
 	
 	

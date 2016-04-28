@@ -10,19 +10,19 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MySQLOperatoerDAO;
+import daoimpl01917.MYSQLOperatoerDAO;
 import daointerfaces01917.DALException;
 import dto01917.OperatoerDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JUnit_Operatoer {
 
-	private static MySQLOperatoerDAO operatoer;
+	private static MYSQLOperatoerDAO operatoer;
 	private static OperatoerDTO operatoerDTO;
 	
 	@Test
 	public void a_getListOperatoer(){
-		operatoer = new MySQLOperatoerDAO();
+		operatoer = new MYSQLOperatoerDAO();
 		operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
 		try {
 			List<OperatoerDTO> listtest = operatoer.getOperatoerList();
