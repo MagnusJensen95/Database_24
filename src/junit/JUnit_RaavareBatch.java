@@ -83,7 +83,7 @@ public class JUnit_RaavareBatch {
 			RaavareBatchDTO temp = raavarebatch.getRaavareBatch(raavarebatchDTO.getRbId());
 			assertEquals(temp.getMaengde(), raavarebatchDTO.getMaengde(), 0.5);
 		} catch (DALException e) {
-			fail("error getting updating receptkomp!");
+			fail("error getting updating raavarebatch!");
 		}
 	}
 }
