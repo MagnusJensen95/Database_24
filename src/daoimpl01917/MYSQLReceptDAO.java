@@ -63,7 +63,7 @@ public class MYSQLReceptDAO implements ReceptDAO{
 			createRecept.execute();  
 			ResultSet rs = Connector.getInstance().doQuery("select max(recept_id) from view_recept;");
 			if (rs.first()){   
-				id =rs.getInt(1);		
+				id = rs.getInt(1);		
 			}
 			recept.setReceptId(id);
 		} catch (Exception e) {
