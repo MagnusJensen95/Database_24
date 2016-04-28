@@ -14,5 +14,5 @@ public interface ReceptDAO {
 
 	void updateRecept(ReceptDTO recept) throws DALException;
 	
-	ResultSet getFullRecept();
+	ResultSet getFullRecept(int recept_id, int raavare_id);
 }

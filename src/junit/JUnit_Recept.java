@@ -2,6 +2,8 @@ package junit;
 
 import static org.junit.Assert.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.After;
@@ -90,4 +92,15 @@ public class JUnit_Recept {
 			fail("error getting updating recept!");
 		}
 	}
+	
+	@Test
+	public void e_getFullRecept(){
+		ResultSet set = recept.getFullRecept(1, 1);
+		try {
+			assertEquals(set.getString(2), "margherita");
+		} catch (SQLException e) {
+			fail("error getting indexstring!");
+		}
+	}
 }
+
