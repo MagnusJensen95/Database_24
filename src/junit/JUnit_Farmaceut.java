@@ -1,20 +1,17 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLRaavareBatchDAO;
 import daoimpl01917.MYSQLFarmaceutDAO;
 import daointerfaces01917.DALException;
 import dto01917.FarmaceutDTO;
-import dto01917.RaavareBatchDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JUnit_Farmaceut {
@@ -25,7 +22,7 @@ public class JUnit_Farmaceut {
 	@Test
 	public void a_getListFarmaceut(){
 		farmaceut = new MYSQLFarmaceutDAO();
-		farmaceutDTO = new FarmaceutDTO("Plebnus", "PN", "121291-1212", "suckit");
+		farmaceutDTO = new FarmaceutDTO("Morten", "MJ", "121291-1212", "testpass");
 		try{
 			List<FarmaceutDTO> liste = farmaceut.getFarmaceutList();
 			if(liste == null){
@@ -78,7 +75,7 @@ public class JUnit_Farmaceut {
 	@Test
 	public void d_updateFarmaceut(){
 		try {
-			farmaceutDTO.setfarmNavn("testnus");
+			farmaceutDTO.setfarmNavn("Mortin");
 			farmaceut.updateFarmaceut(farmaceutDTO, farmaceutDTO.getfarmId());
 			FarmaceutDTO temp = farmaceut.getFarmaceut(farmaceutDTO.getfarmId());
 			assertEquals(temp.getCpr(), farmaceutDTO.getCpr());

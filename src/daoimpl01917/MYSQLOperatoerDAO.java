@@ -1,45 +1,38 @@
 package daoimpl01917;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 //import 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import connector01917.Connector;
-import java.sql.*;
 import daointerfaces01917.DALException;
 import daointerfaces01917.OperatoerDAO;
-import dto01917.FarmaceutDTO;
 import dto01917.OperatoerDTO;
 
 public class MYSQLOperatoerDAO implements OperatoerDAO {
 	
-	
-	
 	public OperatoerDTO getOperatoer(int oprId) throws DALException {
-		
-		
-	    try {
-	    	
-	    	 CallableStatement getOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_operatoer(?)");
-			    getOP.setInt(1, oprId);
-			    ResultSet rs = getOP.executeQuery();
-			    if (rs.first()){			    	
-			    	String opr_navn = rs.getString(2);
-			    	String opr_ini = rs.getString(3);
-			    	String opr_cpr = rs.getString(4);
-			    	String opr_password = rs.getString(5);
-			    	
-			    	OperatoerDTO newopr = new OperatoerDTO(opr_navn, opr_ini, opr_cpr, opr_password);
-			    	newopr.setOprId(oprId);
-			    	System.out.println("finised!");
-			    	return newopr;
-			    }
+		try {
+			CallableStatement getOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_operatoer(?)");
+			getOP.setInt(1, oprId);
+			ResultSet rs = getOP.executeQuery();
+			if (rs.first()){			    	
+				String opr_navn = rs.getString(2);
+			    String opr_ini = rs.getString(3);
+			    String opr_cpr = rs.getString(4);
+			    String opr_password = rs.getString(5);
+			    
+			    OperatoerDTO newopr = new OperatoerDTO(opr_navn, opr_ini, opr_cpr, opr_password);
+			    newopr.setOprId(oprId);
+			    return newopr;
+			}
+	    } catch (SQLException e) {
+	    	throw new DALException(e); 
 	    }
-	    catch (SQLException e) {throw new DALException(e); }
 	    return null;
-		
 	}
 	
 	public void createOperatoer(OperatoerDTO opr) throws DALException {  
@@ -58,13 +51,12 @@ public class MYSQLOperatoerDAO implements OperatoerDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Cannot create operator");
+			System.err.println("Could not create operatoer, check if the database is running!");
 		}
 	}
 	
 	public void updateOperatoer(OperatoerDTO opr, int id) throws DALException {
 		try {
-			
 			CallableStatement updateOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call update_operatoer(?,?,?,?,?)");
 			updateOP.setString(1, opr.getOprNavn());
 			updateOP.setString(2, opr.getIni());
@@ -72,9 +64,6 @@ public class MYSQLOperatoerDAO implements OperatoerDAO {
 			updateOP.setString(4, opr.getPassword());
 			updateOP.setInt(5, id);
 			updateOP.execute();
-
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,7 +71,6 @@ public class MYSQLOperatoerDAO implements OperatoerDAO {
 	
 	public List<OperatoerDTO> getOperatoerList() throws DALException {
 		List<OperatoerDTO> list = new ArrayList<OperatoerDTO>();
-		
 		try
 		{
 			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_Operatoer");
@@ -93,9 +81,9 @@ public class MYSQLOperatoerDAO implements OperatoerDAO {
 				list.add(current);
 				 
 			}
+		} catch (SQLException e) {
+			throw new DALException(e); 
 		}
-		catch (SQLException e) { throw new DALException(e); }
-		System.out.println("Operatoerer \n");
 		return list;
 	}
 }

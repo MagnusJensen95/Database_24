@@ -1,21 +1,16 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLReceptDAO;
 import daoimpl01917.MYSQLReceptKompDAO;
 import daointerfaces01917.DALException;
-import dto01917.ReceptDTO;
 import dto01917.ReceptKompDTO;
 
 

@@ -8,15 +8,10 @@ import java.util.List;
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RaavareDAO;
-import dto01917.ProduktBatchDTO;
 import dto01917.RaavareDTO;
-import dto01917.ReceptDTO;
-import dto01917.ReceptKompDTO;
 
 public class MYSQLRaavareDAO implements RaavareDAO{
 	
-	
-
 	@Override
 	public RaavareDTO getRaavare(int raavareId) throws DALException {
 		try {
@@ -51,7 +46,6 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 		catch (SQLException e) {
 			throw new DALException(e); 
 		}
-		System.out.println("Produktbatches: \n");
 		return list;
 	}
 
@@ -59,23 +53,18 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 	public void createRaavare(RaavareDTO raavare) throws DALException {
 		try {
 			int id = 0;
-		   
 		    CallableStatement createRaavare = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_raavare(?,?)");
 		    createRaavare.setString(1, raavare.getRaavareNavn());
 		    createRaavare.setString(2, raavare.getLeverandoer());
 		    createRaavare.execute();
-		    
-		    
 		    ResultSet rs = Connector.getInstance().doQuery("select max(raavare_id) from view_raavare;");
 		    if (rs.first()){   
 		    	id =rs.getInt(1);		
 		    }
 			raavare.setRaavareId(id);
-			
-		    
 		   } catch (Exception e) {
 			   e.printStackTrace();
-		    System.out.println("Cannot create recept");
+			   System.err.println("Could not create Raavare, check if the database is running!");
 		   }
 	}
 
@@ -85,15 +74,8 @@ public class MYSQLRaavareDAO implements RaavareDAO{
 			Connector.getInstance().doUpdate(
 					"UPDATE raavare SET  raavare_navn= '" + raavare.getRaavareNavn() + "', leverandoer = '"
 							+ raavare.getLeverandoer() + "' WHERE raavare_id = " + raavare.getRaavareId());
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
-		
-	}
-	
-	
-
-
+}

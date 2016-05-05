@@ -1,19 +1,16 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLRaavareBatchDAO;
 import daoimpl01917.MYSQLRaavareDAO;
 import daointerfaces01917.DALException;
-import dto01917.RaavareBatchDTO;
 import dto01917.RaavareDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -25,7 +22,7 @@ public class JUnit_Raavare {
 	@Test
 	public void a_getListRaavare(){
 		raavare = new MYSQLRaavareDAO();
-		raavareDTO = new RaavareDTO(8, "Jensen", "Plebias");
+		raavareDTO = new RaavareDTO(8, "Ananas", "DTU");
 		try{
 			List<RaavareDTO> liste = raavare.getRaavareList();
 			if(liste == null){
@@ -78,7 +75,7 @@ public class JUnit_Raavare {
 	@Test
 	public void d_updateRaavare(){
 		try {
-			raavareDTO.setRaavareNavn("testnus");
+			raavareDTO.setRaavareNavn("Banan");
 			raavare.updateRaavare(raavareDTO);
 			RaavareDTO temp = raavare.getRaavare(raavareDTO.getRaavareId());
 			assertEquals(temp.getRaavareNavn(), raavareDTO.getRaavareNavn());

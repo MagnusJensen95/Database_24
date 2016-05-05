@@ -1,19 +1,16 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLFarmaceutDAO;
 import daoimpl01917.MYSQLVaerkfoererDAO;
 import daointerfaces01917.DALException;
-import dto01917.FarmaceutDTO;
 import dto01917.VaerkfoererDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -25,7 +22,7 @@ public class JUnit_Vaerkfoerer {
 	@Test
 	public void a_getListVaerkfoerer(){
 		vaerkfoerer = new MYSQLVaerkfoererDAO();
-		vaerkfoererDTO = new VaerkfoererDTO("Plebnus", "PN", "121291-1212", "suckit");
+		vaerkfoererDTO = new VaerkfoererDTO("Morten", "MJ", "121291-1212", "testpass");
 		try{
 			List<VaerkfoererDTO> liste = vaerkfoerer.getVaerkfoererList();
 			if(liste == null){
@@ -78,7 +75,7 @@ public class JUnit_Vaerkfoerer {
 	@Test
 	public void d_updateVaerkfoerer(){
 		try {
-			vaerkfoererDTO.setvaerkNavn("testnus");
+			vaerkfoererDTO.setvaerkNavn("Mortin");
 			vaerkfoerer.updateVaerkfoerer(vaerkfoererDTO, vaerkfoererDTO.getvaerkId());
 			VaerkfoererDTO temp = vaerkfoerer.getVaerkfoerer(vaerkfoererDTO.getvaerkId());
 			assertEquals(temp.getCpr(), vaerkfoererDTO.getCpr());

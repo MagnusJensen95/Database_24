@@ -1,21 +1,18 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLProduktBatchDAO;
 import daoimpl01917.MYSQLReceptDAO;
 import daointerfaces01917.DALException;
-import dto01917.ProduktBatchDTO;
 import dto01917.ReceptDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -27,7 +24,7 @@ public class JUnit_Recept {
 	@Test
 	public void a_getListRecept(){
 		recept = new MYSQLReceptDAO();
-		receptDTO = new ReceptDTO("Plebnus"); 
+		receptDTO = new ReceptDTO("Ananas"); 
 		try{
 			List<ReceptDTO> liste = recept.getReceptList();
 			if(liste == null){
@@ -84,7 +81,7 @@ public class JUnit_Recept {
 	@Test
 	public void d_updateRecept(){
 		try {
-			receptDTO.setReceptNavn("testnus");
+			receptDTO.setReceptNavn("Banan");
 			recept.updateRecept(receptDTO);
 			ReceptDTO temp = recept.getRecept(receptDTO.getReceptId());
 			assertEquals(temp.getReceptNavn(), receptDTO.getReceptNavn());

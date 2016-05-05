@@ -1,6 +1,5 @@
 package connector01917;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -29,14 +28,12 @@ public class Connector {
 				System.exit(1);
 			}
 		}
-     	
-        
     }
     
     public static Connector getInstance(){  
-    	if (conn == null)
-    	conn = new Connector();
-    	
+    	if (conn == null){
+    		conn = new Connector();
+    	}
     	return conn;
     }
     

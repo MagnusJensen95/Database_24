@@ -23,7 +23,6 @@ public class VaerkfoererDTO {
 	String password;
 
 	public VaerkfoererDTO(String vaerkNavn, String ini, String cpr, String password) {
-
 		this.vaerkNavn = vaerkNavn;
 		this.ini = ini;
 		this.cpr = cpr;
@@ -31,7 +30,6 @@ public class VaerkfoererDTO {
 	}
 
 	public VaerkfoererDTO(VaerkfoererDTO vaerk) {
-
 		this.vaerkNavn = vaerk.getvaerkNavn();
 		this.ini = vaerk.getIni();
 		this.cpr = vaerk.getCpr();

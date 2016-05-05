@@ -23,7 +23,6 @@ public class OperatoerDTO {
 	String password;
 
 	public OperatoerDTO(String oprNavn, String ini, String cpr, String password) {
-
 		this.oprNavn = oprNavn;
 		this.ini = ini;
 		this.cpr = cpr;
@@ -31,7 +30,6 @@ public class OperatoerDTO {
 	}
 
 	public OperatoerDTO(OperatoerDTO opr) {
-
 		this.oprNavn = opr.getOprNavn();
 		this.ini = opr.getIni();
 		this.cpr = opr.getCpr();

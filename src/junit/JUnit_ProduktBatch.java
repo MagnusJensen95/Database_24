@@ -1,8 +1,8 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.FixMethodOrder;

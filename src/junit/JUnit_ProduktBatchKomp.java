@@ -1,22 +1,17 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import daoimpl01917.MYSQLProduktBatchKompDAO;
-import daoimpl01917.MYSQLProduktBatchDAO;
 import daointerfaces01917.DALException;
-import dto01917.ProduktBatchDTO;
 import dto01917.ProduktBatchKompDTO;
-import junit.framework.Assert;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JUnit_ProduktBatchKomp {

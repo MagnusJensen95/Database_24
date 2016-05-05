@@ -9,14 +9,10 @@ import java.util.List;
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RaavareBatchDAO;
-import dto01917.OperatoerDTO;
-import dto01917.ProduktBatchDTO;
 import dto01917.RaavareBatchDTO;
 
 public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 
-	
-	
 	@Override
 	public RaavareBatchDTO getRaavareBatch(int rbId) throws DALException {
 		try {
@@ -37,7 +33,6 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList() throws DALException {
 		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
-		
 		try
 		{
 			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_raavarebatch");
@@ -47,8 +42,9 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 				list.add(current);
 			}
 		}
-		catch (SQLException e) { throw new DALException(e); }
-		System.out.println("Produktbatches: \n");
+		catch (SQLException e) {
+			throw new DALException(e); 
+		}
 		return list;
 	}
 
@@ -64,8 +60,9 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 				list.add(current);
 			}
 		}
-		catch (SQLException e) { throw new DALException(e); }
-		System.out.println("Produktbatches: \n");
+		catch (SQLException e) { 
+			throw new DALException(e); 
+		}
 		return list;
 	}
 
@@ -79,25 +76,19 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 		    createOP.execute();
 		    
 		    if (createOP.getInt(3) == 1){
-		    	System.out.println("ggWP");
+		    	int id = 0;
+			    ResultSet rs = Connector.getInstance().doQuery("select max(rb_id) from view_raavarebatch;");
+				if (rs.first()){   
+					id =rs.getInt(1);		
+				}
+				raavarebatch.setRbId(id);
 		    }
-		    else 
-		    	System.out.println("Pleb det må du ikke");
-			
-		   
-		    
-		    int id = 0;
-		    ResultSet rs = Connector.getInstance().doQuery("select max(rb_id) from view_raavarebatch;");
-			if (rs.first()){   
-				id =rs.getInt(1);		
-			}
-			raavarebatch.setRbId(id);
-			
+		    else {
+		    	System.err.println("Return value of 'createRaavareBatch' was a error value");
+		    }
 		}
-		
-		
 		catch (SQLException e) {
-		    System.out.println("Cannot create raavarebatch, check wether or not the referenced Recept_id exists");
+		    System.err.println("Cannot create raavarebatch, check weather or not the referenced Recept_id exists");
 		}
 	}
 

@@ -1,11 +1,10 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -23,7 +22,7 @@ public class JUnit_Operatoer {
 	@Test
 	public void a_getListOperatoer(){
 		operatoer = new MYSQLOperatoerDAO();
-		operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
+		operatoerDTO = new OperatoerDTO("Morten", "MJ", "121291-1212", "testpass");
 		try {
 			List<OperatoerDTO> listtest = operatoer.getOperatoerList();
 			if(listtest == null){
@@ -79,7 +78,7 @@ public class JUnit_Operatoer {
 	
 	@Test
 	public void d_updateOperatoer(){
-		OperatoerDTO testSecond = new OperatoerDTO("Testnus", "TN", "131292-1313", "testpass");
+		OperatoerDTO testSecond = new OperatoerDTO("Mortin", "MJ", "131292-1313", "testpass");
 		try {
 			operatoer.updateOperatoer(testSecond, operatoerDTO.getOprId());
 			OperatoerDTO temp = operatoer.getOperatoer(operatoerDTO.getOprId());

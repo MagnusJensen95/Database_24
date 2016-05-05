@@ -23,7 +23,6 @@ public class FarmaceutDTO {
 	private String password;
 
 	public FarmaceutDTO(String farmNavn, String ini, String cpr, String password) {
-
 		this.farmNavn = farmNavn;
 		this.ini = ini;
 		this.cpr = cpr;
@@ -31,7 +30,6 @@ public class FarmaceutDTO {
 	}
 
 	public FarmaceutDTO(FarmaceutDTO farm) {
-
 		this.farmNavn = farm.getfarmNavn();
 		this.ini = farm.getIni();
 		this.cpr = farm.getCpr();
@@ -83,4 +81,3 @@ public class FarmaceutDTO {
 		this.farmId = farmId;
 	}
 }
-

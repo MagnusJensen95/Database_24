@@ -1,16 +1,13 @@
 package connector01917;
 
-
-// erstat konstanterne nedenfor
-
 public abstract class Constant
 {
 	public static final String
-		server					= "sql-lab1.cc.dtu.dk",  // database-serveren
-		database				=  "cdio_db",  //"jdbcdatabase", // navnet paa din database = dit studienummer
-		username				= "root", // dit brugernavn = dit studienummer 
-		password				= ""; // dit password som du har valgt til din database
+		server					= "sql-lab1.cc.dtu.dk",  // Address to the database-server
+		database				=  "cdio_db", //Name of the database
+		username				= "root", //Username for the database
+		password				= ""; //Password for the database
 	
 	public static final int
-		port					= 3306;
-}
+		port					= 3306; //Port to acces database
+} 

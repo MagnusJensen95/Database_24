@@ -9,7 +9,6 @@ import java.util.List;
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ReceptKompDAO;
-import dto01917.ReceptDTO;
 import dto01917.ReceptKompDTO;
 
 public class MYSQLReceptKompDAO implements ReceptKompDAO {
@@ -17,7 +16,6 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 	@Override
 	public ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException {
 		try {
-
 			CallableStatement getReceptKomponent = (CallableStatement) Connector.getInstance().getConnection()
 					.prepareCall("call get_receptkomponent(?,?)");
 			getReceptKomponent.setInt(1, receptId);
@@ -30,14 +28,12 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 				double tolerance = rs.getDouble(4);
 
 				ReceptKompDTO newRecKom = new ReceptKompDTO(recept_id, raavare_id, nom_netto, tolerance);
-
 				return newRecKom;
 			}
 		} catch (SQLException e) {
 			throw new DALException(e);
 		}
 		return null;
-
 	}
 
 	@Override
@@ -54,15 +50,12 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 		} catch (SQLException e) {
 			throw new DALException(e);
 		}
-
-		System.out.println("Receptkomponenter: \n");
 		return list;
 	}
 
 	@Override
 	public List<ReceptKompDTO> getReceptKompList() throws DALException {
 		List<ReceptKompDTO> list = new ArrayList<ReceptKompDTO>();
-
 		try {
 			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_receptkomponent");
 			while (rs.next()) {
@@ -73,14 +66,11 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 		} catch (SQLException e) {
 			throw new DALException(e);
 		}
-
-		System.out.println("Receptkomponenter: \n");
 		return list;
 	}
 
 	@Override
 	public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
-		
 		try {
 		    CallableStatement createRecept = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_receptkomponent(?,?,?,?,?)");
 		    createRecept.setInt(1, receptkomponent.getReceptId());
@@ -89,18 +79,10 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 		    createRecept.setDouble(4, receptkomponent.getTolerance());
 		    createRecept.setInt(5, 0);
 		    createRecept.execute();
-		    
-		    if (createRecept.getInt(5) == 1){
-		    	System.out.println("ggWP");
-		    }
-		    else 
-		    	System.out.println("Pleb det må du ikke");
-			
-		    
 		   
 		   } catch (Exception e) {
 			   e.printStackTrace();
-			   System.out.println("Cannot create receptkomponent");
+			   System.err.println("Could not create receptkomponent, check if the database is running!");
 		  }
 	}
 
@@ -116,5 +98,4 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 			e.printStackTrace();
 		}		
 	}
-
 }

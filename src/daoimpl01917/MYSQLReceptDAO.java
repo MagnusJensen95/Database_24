@@ -5,13 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ReceptDAO;
-import dto01917.OperatoerDTO;
-import dto01917.ProduktBatchDTO;
 import dto01917.ReceptDTO;
 
 public class MYSQLReceptDAO implements ReceptDAO{
@@ -37,22 +33,22 @@ public class MYSQLReceptDAO implements ReceptDAO{
 	
 	@Override
 	public List<ReceptDTO> getReceptList() throws DALException {
-	List<ReceptDTO> list = new ArrayList<ReceptDTO>();
-	
-	try
-	{
-		ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_recept");
-		while (rs.next()) 
+		List<ReceptDTO> list = new ArrayList<ReceptDTO>();
+		try
 		{
-			ReceptDTO current = new ReceptDTO(rs.getString(2));
-			current.setReceptId(rs.getInt(1));
-			list.add(current);
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_recept");
+			while (rs.next()) 
+			{
+				ReceptDTO current = new ReceptDTO(rs.getString(2));
+				current.setReceptId(rs.getInt(1));
+				list.add(current);
+			}
 		}
+		catch (SQLException e) {
+			throw new DALException(e); 
+		}
+		return list;
 	}
-	catch (SQLException e) { throw new DALException(e); }
-	System.out.println("Recepter: \n");
-	return list;
-}
 	
 	@Override
 	public void createRecept(ReceptDTO recept) throws DALException {
@@ -68,7 +64,7 @@ public class MYSQLReceptDAO implements ReceptDAO{
 			recept.setReceptId(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Cannot create recept");
+			System.err.println("Could not create recept, check if the database is running!");
 		}
 	}
 
@@ -82,15 +78,12 @@ public class MYSQLReceptDAO implements ReceptDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
 	public ResultSet getFullRecept(int recept_id, int raavare_id) {
 		try {
 			ResultSet getFullRecept = Connector.getInstance().doQuery("select * from view_fuldrecept where recept_id = "+recept_id+" and raavare_id = "+raavare_id+";");
-			
-		
 			if (getFullRecept.first()){			    	
 				return getFullRecept;
 			}
@@ -100,6 +93,4 @@ public class MYSQLReceptDAO implements ReceptDAO{
 		}
 		return null;
 	}
-		
-	
 }

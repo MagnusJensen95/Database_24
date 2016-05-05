@@ -8,41 +8,32 @@ import java.util.List;
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ProduktBatchDAO;
-import dto01917.OperatoerDTO;
 import dto01917.ProduktBatchDTO;
 
 public class MYSQLProduktBatchDAO implements ProduktBatchDAO{
 
-	
-	
 	@Override
 	public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {
-		  try {
-		    	
-		    	 CallableStatement getPB = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_produktbatch(?)");
-				    getPB.setInt(1, pbId);
-				    ResultSet rs = getPB.executeQuery();
-				    if (rs.first()){			    	
-				    	int pb_status = rs.getInt(2);
-				    	int pb_recept = rs.getInt(3);
-				    	
-				    	
-				    	ProduktBatchDTO newpb = new ProduktBatchDTO(pb_status, pb_recept);
-				    	newpb.setPbId(pbId);
-				    	return newpb;
-				    }
-		    }
-		    catch (SQLException e) {throw new DALException(e); }
-		    return null;
-			
+		try {
+			CallableStatement getPB = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call get_produktbatch(?)");
+			getPB.setInt(1, pbId);
+			ResultSet rs = getPB.executeQuery();
+			if (rs.first()){			    	
+				int pb_status = rs.getInt(2);
+				int pb_recept = rs.getInt(3);
+				ProduktBatchDTO newpb = new ProduktBatchDTO(pb_status, pb_recept);
+				newpb.setPbId(pbId);
+				return newpb;
+			}
+		} catch (SQLException e) {
+			throw new DALException(e); 
 		}
-	
+		return null;	
+	}
 
 	@Override
 	public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
-		
 		List<ProduktBatchDTO> list = new ArrayList<ProduktBatchDTO>();
-		
 		try
 		{
 			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_produktbatch");
@@ -52,8 +43,9 @@ public class MYSQLProduktBatchDAO implements ProduktBatchDAO{
 				current.setPbId(rs.getInt(1));
 				list.add(current);
 			}
+		} catch (SQLException e) {
+			throw new DALException(e); 
 		}
-		catch (SQLException e) { throw new DALException(e); }
 		return list;
 	}
 
@@ -70,26 +62,20 @@ public class MYSQLProduktBatchDAO implements ProduktBatchDAO{
 				int id = rs.getInt(1);
 				produktbatch.setPbId(id);
 			}
-		    
 		} catch (SQLException e) {
-		    System.out.println("Cannot create produktbatch, check wether or not the referenced Recept_id exists");
+		    System.err.println("Could not create produktbatch, check if the database is running!");
 		}
 	}
 
 	@Override
-	//does not need correct implementation according to cdio_final
 	public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
 		try {
 			Connector.getInstance().doUpdate(
 					"UPDATE produktbatch SET  status = " + produktbatch.getStatus() + "  WHERE pb_id = " +
 					produktbatch.getPbId());
 
-					} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
-
-	
-	
 }
