@@ -1,4 +1,4 @@
-package dto01917;
+package notused;
 
 /**
  * Vaerkfoerer Data Access Objekt

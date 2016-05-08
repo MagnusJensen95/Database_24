@@ -92,9 +92,9 @@ public class JUnit_Recept {
 	
 	@Test
 	public void e_getFullRecept(){
-		ResultSet set = recept.getFullRecept(1, 1);
+		ResultSet set = recept.getFullRecept("margherita");
 		try {
-			assertEquals(set.getString(2), "margherita");
+			assertEquals(set.getString(2), "dej");
 		} catch (SQLException e) {
 			fail("error getting indexstring!");
 		}

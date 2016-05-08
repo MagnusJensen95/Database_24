@@ -1,8 +1,8 @@
-package daointerfaces01917;
+package notused;
 
 import java.util.List;
 
-import dto01917.VaerkfoererDTO;
+import daointerfaces01917.DALException;
 
 public interface VaerkfoererDAO {
 	VaerkfoererDTO getVaerkfoerer(int oprId) throws DALException;

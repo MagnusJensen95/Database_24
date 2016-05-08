@@ -1,4 +1,4 @@
-package junit;
+package notused;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -9,9 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import daoimpl01917.MYSQLFarmaceutDAO;
 import daointerfaces01917.DALException;
-import dto01917.FarmaceutDTO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JUnit_Farmaceut {

@@ -73,7 +73,7 @@ public class MYSQLOperatoerDAO implements OperatoerDAO {
 		List<OperatoerDTO> list = new ArrayList<OperatoerDTO>();
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_Operatoer");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_operatoer");
 			while (rs.next()) 
 			{
 				OperatoerDTO current = new OperatoerDTO(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));

@@ -81,9 +81,9 @@ public class MYSQLReceptDAO implements ReceptDAO{
 	}
 
 	@Override
-	public ResultSet getFullRecept(int recept_id, int raavare_id) {
+	public ResultSet getFullRecept(String navn) {
 		try {
-			ResultSet getFullRecept = Connector.getInstance().doQuery("select * from view_fuldrecept where recept_id = "+recept_id+" and raavare_id = "+raavare_id+";");
+			ResultSet getFullRecept = Connector.getInstance().doQuery("select * from view_fuldrecept where recept_navn = '"+navn+"';");
 			if (getFullRecept.first()){			    	
 				return getFullRecept;
 			}

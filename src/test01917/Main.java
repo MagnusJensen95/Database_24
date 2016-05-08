@@ -2,7 +2,6 @@ package test01917;
 
 import daoimpl01917.*;
 import daointerfaces01917.DALException;
-import dto01917.FarmaceutDTO;
 import dto01917.OperatoerDTO;
 import dto01917.ProduktBatchDTO;
 import dto01917.ProduktBatchKompDTO;
@@ -10,7 +9,10 @@ import dto01917.RaavareBatchDTO;
 import dto01917.RaavareDTO;
 import dto01917.ReceptDTO;
 import dto01917.ReceptKompDTO;
-import dto01917.VaerkfoererDTO;
+import notused.FarmaceutDTO;
+import notused.MYSQLFarmaceutDAO;
+import notused.MYSQLVaerkfoererDAO;
+import notused.VaerkfoererDTO;
 
 import java.sql.SQLException;
 import java.util.List;

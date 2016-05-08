@@ -1,4 +1,4 @@
-package daoimpl01917;
+package notused;
 
 //import 
 import java.sql.CallableStatement;
@@ -9,8 +9,6 @@ import java.util.List;
 
 import connector01917.Connector;
 import daointerfaces01917.DALException;
-import daointerfaces01917.FarmaceutDAO;
-import dto01917.FarmaceutDTO;
 
 public class MYSQLFarmaceutDAO implements FarmaceutDAO {
 	
