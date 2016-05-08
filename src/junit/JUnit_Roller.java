@@ -45,39 +45,17 @@ public class JUnit_Roller {
 	}
 	
 	@Test
-	public void b_addOperatoer(){
+	public void b_addOperatoerOgRolle(){
 		try {
-			List<OperatoerDTO> listTest = operatoer.getOperatoerList();
-			for(int i = 0; i < listTest.size(); i++){
-				if(listTest.get(i).getOprNavn().equals(operatoerDTO.getOprNavn())){
-					if(listTest.get(i).getCpr().equals(operatoerDTO.getCpr())){
-						fail("Already exist operatoer with those and cant add!");
-					}
-				}
-			}
-		} catch (DALException e1) {
-			fail("failed in getting list for addoperatoer");
-		}
-		try {
-			operatoer.createOperatoer(operatoerDTO);
+			operatoer.createOperatoer(operatoerDTO, rollerDTO.isAdministrator(), rollerDTO.isFarmaceut(), rollerDTO.isVaerkfoerer());
 			rollerDTO.setOpr_id(operatoerDTO.getOprId());
 		} catch (DALException e) {
 			fail("Could not createoperatoer");
 		}
 	}
-
-	@Test 
-	public void c_addRoller(){
-		try {
-			roller.createRolle(rollerDTO);
-		} catch (DALException e) {
-			e.printStackTrace();
-			fail("Could not createroller");
-		}
-	}
-
+	
 	@Test
-	public void d_getRoller() {
+	public void c_getRoller() {
 		try {
 			RollerDTO test = roller.getRolle(rollerDTO.getOpr_id());
 			if(test != null){
@@ -94,7 +72,7 @@ public class JUnit_Roller {
 	}
 
 	@Test
-	public void e_updateRoller(){
+	public void d_updateRoller(){
 		try {
 			roller.updateRolle(rollerDTO, false, false, true);
 			RollerDTO temp = roller.getRolle(rollerDTO.getOpr_id());

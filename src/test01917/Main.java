@@ -73,7 +73,7 @@ public class Main {
 		OperatoerDTO operatoerDTO = new OperatoerDTO("Plebnus", "PN", "121291-1212", "suckit");
 		OperatoerDTO operatoerDTO2 = new OperatoerDTO("jensen", "PN", "121291-1212", "suckit");
 		try{
-			operatoer.createOperatoer(operatoerDTO);
+			//operatoer.createOperatoer(operatoerDTO);
 			
 //			operatoerDTO.setOprNavn("Mar");
 //			operatoerDTO.setPassword("JegMar,erennoob");

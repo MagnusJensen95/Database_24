@@ -53,7 +53,7 @@ public class JUnit_Operatoer {
 			fail("failed in getting list for addoperatoer");
 		}
 		try {
-			operatoer.createOperatoer(operatoerDTO);
+			operatoer.createOperatoer(operatoerDTO, true, false, false);
 		} catch (DALException e) {
 			fail("Could not createoperatoer");
 		}

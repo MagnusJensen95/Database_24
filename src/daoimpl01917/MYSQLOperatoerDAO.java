@@ -35,14 +35,17 @@ public class MYSQLOperatoerDAO implements OperatoerDAO {
 	    return null;
 	}
 	
-	public void createOperatoer(OperatoerDTO opr) throws DALException {  
+	public void createOperatoer(OperatoerDTO opr, boolean administrator, boolean farmaceut, boolean vaerkfoerer) throws DALException {  
 		try {
 			int id = 0;
-			CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_operatoer(?,?,?,?)");
+			CallableStatement createOP = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_operatoer(?,?,?,?,?,?,?)");
 			createOP.setString(1, opr.getOprNavn());
 			createOP.setString(2, opr.getIni());
 			createOP.setString(3, opr.getCpr());
 			createOP.setString(4, opr.getPassword());
+			createOP.setBoolean(5, administrator);
+			createOP.setBoolean(6, farmaceut);
+			createOP.setBoolean(7, vaerkfoerer);
 			createOP.execute();   
 			ResultSet rs = Connector.getInstance().doQuery("select max(opr_id) from operatoer;");
 			if (rs.first()){

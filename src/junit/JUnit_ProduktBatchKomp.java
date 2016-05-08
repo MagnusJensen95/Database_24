@@ -82,9 +82,6 @@ public class JUnit_ProduktBatchKomp {
 			produktbatchkompDTO.setNetto(777);
 			produktbatchkomp.updateProduktBatchKomp(produktbatchkompDTO);
 			ProduktBatchKompDTO temp = produktbatchkomp.getProduktBatchKomp(produktbatchkompDTO.getPbId(), produktbatchkompDTO.getRbId());
-			System.out.println("temp is: "+temp.getNetto());
-			System.out.println("pb id: "+produktbatchkompDTO.getPbId());
-			System.out.println("rb id: "+produktbatchkompDTO.getRbId());
 			assertEquals(temp.getNetto(), produktbatchkompDTO.getNetto(), 0.1);
 		} catch (DALException e) {
 			fail("error getting updating produktbatchkomp!");
