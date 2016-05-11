@@ -38,7 +38,7 @@ public class MYSQLRollerDAO implements RollerDAO{
 		List<RollerDTO> list = new ArrayList<RollerDTO>();
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_roller");
+			ResultSet rs = Connector.getInstance().doQuery("select * from roller;");
 			while (rs.next()) 
 			{
 				RollerDTO current = new RollerDTO(rs.getInt(1), rs.getBoolean(2), rs.getBoolean(3), rs.getBoolean(4));

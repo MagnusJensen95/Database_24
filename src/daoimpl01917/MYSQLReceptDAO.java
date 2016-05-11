@@ -36,7 +36,7 @@ public class MYSQLReceptDAO implements ReceptDAO{
 		List<ReceptDTO> list = new ArrayList<ReceptDTO>();
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_recept");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM recept;");
 			while (rs.next()) 
 			{
 				ReceptDTO current = new ReceptDTO(rs.getString(2));
@@ -57,7 +57,7 @@ public class MYSQLReceptDAO implements ReceptDAO{
 		    CallableStatement createRecept = (CallableStatement) Connector.getInstance().getConnection().prepareCall("call add_recept(?)");
 			createRecept.setString(1, recept.getReceptNavn());	   
 			createRecept.execute();  
-			ResultSet rs = Connector.getInstance().doQuery("select max(recept_id) from view_recept;");
+			ResultSet rs = Connector.getInstance().doQuery("select max(recept_id) from recept;");
 			if (rs.first()){   
 				id = rs.getInt(1);		
 			}

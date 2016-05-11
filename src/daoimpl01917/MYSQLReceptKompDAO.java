@@ -41,7 +41,7 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 		List<ReceptKompDTO> list = new ArrayList<ReceptKompDTO>();
 		try {
 			ResultSet rs = Connector.getInstance()
-					.doQuery("SELECT * FROM view_receptkomponent where recept_id = " + receptId);
+					.doQuery("SELECT * FROM receptkomponent where recept_id = " + receptId);
 			while (rs.next()) {
 				ReceptKompDTO current = new ReceptKompDTO(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDouble(4));
 
@@ -57,7 +57,7 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO {
 	public List<ReceptKompDTO> getReceptKompList() throws DALException {
 		List<ReceptKompDTO> list = new ArrayList<ReceptKompDTO>();
 		try {
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_receptkomponent");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM receptkomponent;");
 			while (rs.next()) {
 				ReceptKompDTO current = new ReceptKompDTO(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDouble(4));
 

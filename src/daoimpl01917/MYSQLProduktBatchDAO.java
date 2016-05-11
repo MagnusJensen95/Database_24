@@ -36,7 +36,7 @@ public class MYSQLProduktBatchDAO implements ProduktBatchDAO{
 		List<ProduktBatchDTO> list = new ArrayList<ProduktBatchDTO>();
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_produktbatch");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM produktbatch;");
 			while (rs.next()) 
 			{
 				ProduktBatchDTO current = new ProduktBatchDTO(rs.getInt(2), rs.getInt(3));

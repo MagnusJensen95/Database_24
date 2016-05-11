@@ -35,7 +35,7 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
 		try
 		{
-			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM view_raavarebatch");
+			ResultSet rs = Connector.getInstance().doQuery("SELECT * FROM raavarebatch;");
 			while (rs.next()) 
 			{
 				RaavareBatchDTO current = new RaavareBatchDTO(rs.getInt(1), rs.getInt(2), rs.getDouble(3));
@@ -77,7 +77,7 @@ public class MYSQLRaavareBatchDAO implements RaavareBatchDAO{
 		    
 		    if (createOP.getInt(3) == 1){
 		    	int id = 0;
-			    ResultSet rs = Connector.getInstance().doQuery("select max(rb_id) from view_raavarebatch;");
+			    ResultSet rs = Connector.getInstance().doQuery("select max(rb_id) from raavarebatch;");
 				if (rs.first()){   
 					id =rs.getInt(1);		
 				}
